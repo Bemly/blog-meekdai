@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>蓝莓小果冻的博客</title><link>https://Bemly.github.io/blog-meekdai</link><description>一个喜欢尝鲜却苦于没有技术的小透明&lt;br /&gt;此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动</description><copyright>蓝莓小果冻的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/48025099?v=4&amp;size=64</url><title>avatar</title><link>https://Bemly.github.io/blog-meekdai</link></image><lastBuildDate>Fri, 23 Aug 2024 20:57:48 +0000</lastBuildDate><managingEditor>蓝莓小果冻的博客</managingEditor><ttl>60</ttl><webMaster>蓝莓小果冻的博客</webMaster><item><title>ANSI 转义标识符 的 用法</title><link>https://Bemly.github.io/blog-meekdai/post/ANSI%20-zhuan-yi-biao-shi-fu-%20-de-%20-yong-fa.html</link><description>最近在写 TUI terminal UI界面，需要用到&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>蓝莓小果冻的博客</title><link>https://Bemly.github.io/blog-meekdai</link><description>一个喜欢尝鲜却苦于没有技术的小透明&lt;br /&gt;此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动</description><copyright>蓝莓小果冻的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/48025099?v=4&amp;size=64</url><title>avatar</title><link>https://Bemly.github.io/blog-meekdai</link></image><lastBuildDate>Fri, 23 Aug 2024 21:05:39 +0000</lastBuildDate><managingEditor>蓝莓小果冻的博客</managingEditor><ttl>60</ttl><webMaster>蓝莓小果冻的博客</webMaster><item><title>评论系统 测试区捏，欢迎鞭打</title><link>https://Bemly.github.io/blog-meekdai/post/ping-lun-xi-tong-%20-ce-shi-qu-nie-%EF%BC%8C-huan-ying-bian-da.html</link><description>&#13;
+#5 &#13;
+&#13;
+#4 &#13;
+&#13;
+#3 &#13;
+&#13;
+#2 &#13;
+&#13;
+#1 &#13;
+&#13;
+# 随便ky昂 嘿嘿&#13;
+&#13;
+评论系统使用的是 开源的 [utteranc.es](https://utteranc.es/) 白嫖系统，&#13;
+&#13;
+主打的就是利用 github issue 自托管来实现评论效果，&#13;
+&#13;
+2017 年的大众工具，如今快沦落到无人知晓的地步了（悲。</description><guid isPermaLink="true">https://Bemly.github.io/blog-meekdai/post/ping-lun-xi-tong-%20-ce-shi-qu-nie-%EF%BC%8C-huan-ying-bian-da.html</guid><pubDate>Fri, 23 Aug 2024 21:05:02 +0000</pubDate></item><item><title>ANSI 转义标识符 的 用法</title><link>https://Bemly.github.io/blog-meekdai/post/ANSI%20-zhuan-yi-biao-shi-fu-%20-de-%20-yong-fa.html</link><description>最近在写 TUI terminal UI界面，需要用到&#13;
 &#13;
 鼠标来控制坐标，索性了解来一下 ANSI 的用法&#13;
 &#13;
