@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/48025099?v=4&size=64"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="最近在写 TUI terminal UI界面，需要用到
+
+鼠标来控制坐标，索性了解来一下 ANSI 的用法
+
+下面是原作者写的 Gist，个人觉得已经非常详细了，遂即把这个翻译出来给大家分享分享：
+
+{% gist 458719343aabd01cfb17a3a4f7296797 %}
+
+<script src='https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797.js'></script>
+
+翻译稿：
+
+{% gist 25b4391d1c34c5e3d1fbb238634570b2 %}
+
+<script src='https://gist.github.com/Bemly/25b4391d1c34c5e3d1fbb238634570b2.js'></script>
+
+# ANSI 转义标识符
+
+标准转义码的前缀是 `Escape` 脱离键，常用名`ESC键`:
+
+- Ctrl 键: `^[`
+- 八进制: `\033`
+- Unicode编码: `\u001b`
+- 16进制: `\x1B`
+- 十进制: `27`
+
+ESC 后面跟命令，用左方括号（`[`）分隔，一同称为控制标识符导入器（CSI），\
+CSI 后面还可以跟参数和命令本身。">
+<meta property="og:title" content="ANSI 转义标识符 的 用法">
+<meta property="og:description" content="最近在写 TUI terminal UI界面，需要用到
+
+鼠标来控制坐标，索性了解来一下 ANSI 的用法
+
+下面是原作者写的 Gist，个人觉得已经非常详细了，遂即把这个翻译出来给大家分享分享：
+
+{% gist 458719343aabd01cfb17a3a4f7296797 %}
+
+<script src='https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797.js'></script>
+
+翻译稿：
+
+{% gist 25b4391d1c34c5e3d1fbb238634570b2 %}
+
+<script src='https://gist.github.com/Bemly/25b4391d1c34c5e3d1fbb238634570b2.js'></script>
+
+# ANSI 转义标识符
+
+标准转义码的前缀是 `Escape` 脱离键，常用名`ESC键`:
+
+- Ctrl 键: `^[`
+- 八进制: `\033`
+- Unicode编码: `\u001b`
+- 16进制: `\x1B`
+- 十进制: `27`
+
+ESC 后面跟命令，用左方括号（`[`）分隔，一同称为控制标识符导入器（CSI），\
+CSI 后面还可以跟参数和命令本身。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Bemly.github.io/blog-meekdai/post/ANSI%20-zhuan-yi-biao-shi-fu-%20-de-%20-yong-fa.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/48025099?v=4&size=64">
+<title>ANSI 转义标识符 的 用法</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">ANSI 转义标识符 的 用法</h1>
+<div class="title-right">
+    <a href="https://Bemly.github.io/blog-meekdai" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Bemly/blog-meekdai/issues/5" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>最近在写 TUI terminal UI界面，需要用到</p>
+<p>鼠标来控制坐标，索性了解来一下 ANSI 的用法</p>
+<p>下面是原作者写的 Gist，个人觉得已经非常详细了，遂即把这个翻译出来给大家分享分享：</p>
+<p>{% gist 458719343aabd01cfb17a3a4f7296797 %}</p>
+&lt;script src="https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797.js"&gt;&lt;/script&gt;
+<p>翻译稿：</p>
+<p>{% gist 25b4391d1c34c5e3d1fbb238634570b2 %}</p>
+&lt;script src="https://gist.github.com/Bemly/25b4391d1c34c5e3d1fbb238634570b2.js"&gt;&lt;/script&gt;
+<h1>ANSI 转义标识符</h1>
+<p>标准转义码的前缀是 <code class="notranslate">Escape</code> 脱离键，常用名<code class="notranslate">ESC键</code>:</p>
+<ul>
+<li>Ctrl 键: <code class="notranslate">^[</code></li>
+<li>八进制: <code class="notranslate">\033</code></li>
+<li>Unicode编码: <code class="notranslate">\u001b</code></li>
+<li>16进制: <code class="notranslate">\x1B</code></li>
+<li>十进制: <code class="notranslate">27</code></li>
+</ul>
+<p>ESC 后面跟命令，用左方括号（<code class="notranslate">[</code>）分隔，一同称为控制标识符导入器（CSI），<br>
+CSI 后面还可以跟参数和命令本身。</p>
+<p>参数用分号（<code class="notranslate">;</code>）分割。</p>
+<p>例如：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-cce">\x</span>1b[1<span class="pl-k">;</span>31m  <span class="pl-c"><span class="pl-c">#</span> 1代表加粗，31代表红色前景色（也就是字体颜色）</span></pre></div>
+<h2>标识符（序列）</h2>
+<ul>
+<li><code class="notranslate">ESC</code> - 标准转义码最开始的标识符 <code class="notranslate">ESC</code> (<code class="notranslate">\x1B</code>)</li>
+<li><code class="notranslate">CSI</code> - 控制标识符引入器： <code class="notranslate">ESC [</code> 或 CSI (<code class="notranslate">\x9B</code>) 开头</li>
+<li><code class="notranslate">DCS</code> - 设备控制字符串： <code class="notranslate">ESC P</code> 或 DCS (<code class="notranslate">\x90</code>) 开头</li>
+<li><code class="notranslate">OSC</code> - 操作系统命令： <code class="notranslate">ESC ]</code> 或 OSC (<code class="notranslate">\x9D</code>) 开头</li>
+</ul>
+<p>忽略掉 标识符 和参数之间的所有空格。它们的存在是为了提高可读性。</p>
+<h2>通用 ASCII 码</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>标识符</th>
+<th>十进制</th>
+<th>8进制</th>
+<th>16进制</th>
+<th>转义符</th>
+<th>Ctrl+键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">BEL</code></td>
+<td>7</td>
+<td>007</td>
+<td>0x07</td>
+<td><code class="notranslate">\a</code></td>
+<td><code class="notranslate">^G</code></td>
+<td>BIOS 蜂鸣器 终端响声</td>
+</tr>
+<tr>
+<td><code class="notranslate">BS</code></td>
+<td>8</td>
+<td>010</td>
+<td>0x08</td>
+<td><code class="notranslate">\b</code></td>
+<td><code class="notranslate">^H</code></td>
+<td>退格键</td>
+</tr>
+<tr>
+<td><code class="notranslate">HT</code></td>
+<td>9</td>
+<td>011</td>
+<td>0x09</td>
+<td><code class="notranslate">\t</code></td>
+<td><code class="notranslate">^I</code></td>
+<td>横向 TAB 制表符</td>
+</tr>
+<tr>
+<td><code class="notranslate">LF</code></td>
+<td>10</td>
+<td>012</td>
+<td>0x0A</td>
+<td><code class="notranslate">\n</code></td>
+<td><code class="notranslate">^J</code></td>
+<td>行种子 (换行)</td>
+</tr>
+<tr>
+<td><code class="notranslate">VT</code></td>
+<td>11</td>
+<td>013</td>
+<td>0x0B</td>
+<td><code class="notranslate">\v</code></td>
+<td><code class="notranslate">^K</code></td>
+<td>垂直 TAB 制表符</td>
+</tr>
+<tr>
+<td><code class="notranslate">FF</code></td>
+<td>12</td>
+<td>014</td>
+<td>0x0C</td>
+<td><code class="notranslate">\f</code></td>
+<td><code class="notranslate">^L</code></td>
+<td>表格种子 (同理: 新建页面 <code class="notranslate">NP</code>)</td>
+</tr>
+<tr>
+<td><code class="notranslate">CR</code></td>
+<td>13</td>
+<td>015</td>
+<td>0x0D</td>
+<td><code class="notranslate">\r</code></td>
+<td><code class="notranslate">^M</code></td>
+<td>回车</td>
+</tr>
+<tr>
+<td><code class="notranslate">ESC</code></td>
+<td>27</td>
+<td>033</td>
+<td>0x1B</td>
+<td><code class="notranslate">\e</code><a href="#escape">*</a></td>
+<td><code class="notranslate">^[</code></td>
+<td>ESC 字符</td>
+</tr>
+<tr>
+<td><code class="notranslate">DEL</code></td>
+<td>127</td>
+<td>177</td>
+<td>0x7F</td>
+<td><code class="notranslate">&lt;none&gt;</code></td>
+<td><code class="notranslate">&lt;none&gt;</code></td>
+<td>删除字符</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div id="user-content-escape"></div>
+<blockquote>
+<p><strong>注意：</strong> 某些控制转义标识符，例如 <code class="notranslate">ESC</code> 的 <code class="notranslate">\e</code>, 不能保证在所有语言和编译器中工作。建议用进制作为转义码。</p>
+</blockquote>
+<blockquote>
+<p><strong>注意：</strong> <strong>Ctrl+键</strong> 表示只是将 ASCII码1 中不可打印字符与 ASCII码65（<code class="notranslate">A</code>）中的可打印字符相关联。<br>
+ASCII码1是<code class="notranslate">^A</code>（Ctrl-A），而 ASCII 码 7（BEL）是<code class="notranslate">^G</code>（Ctrl-G）。</p>
+</blockquote>
+<h2>终端光标控制</h2>
+<p>下表的 <code class="notranslate">#</code> 代表不限位数的任意数字</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">ESC 码标识符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="notranslate">ESC[H</code></td>
+<td align="left">光标回到左上角 Home 位置 (0, 0)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[{行};{列}H</code> <br> <code class="notranslate">ESC[{行};{列}f</code></td>
+<td align="left">光标跳转到 # 行, # 列</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[#A</code></td>
+<td align="left">光标向上移动 # 行</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[#B</code></td>
+<td align="left">光标向下移动 # 行</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[#C</code></td>
+<td align="left">光标向右移动 # 列</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[#D</code></td>
+<td align="left">光标向左移动 # 列</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[#E</code></td>
+<td align="left">光标向下移动 # 行，并移动到行首</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[#F</code></td>
+<td align="left">光标向上移动 # 行，并移动到行首</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[#G</code></td>
+<td align="left">光标跳转到 # 列</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[6n</code></td>
+<td align="left">获取光标行列坐标 (打印出 <code class="notranslate">ESC[#;#R</code>)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC M</code></td>
+<td align="left">向上移动一行，如上方遮挡可以滚动一行</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC 7</code></td>
+<td align="left">缓存光标坐标 (DEC)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC 8</code></td>
+<td align="left">恢复最后一次缓存的光标坐标 (DEC)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[s</code></td>
+<td align="left">缓存光标坐标 (SCO)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[u</code></td>
+<td align="left">恢复最后一次缓存的光标坐标 (SCO)</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<blockquote>
+<p><strong>注意：</strong> 某些标识符（如恢复和恢复光标）是私有标识符，没有标准化。<br>
+虽然一些终端仿真器（即xterm及其派生终端）支持 <code class="notranslate">SCO</code> 和 <code class="notranslate">DEC</code> 标识符，<br>
+但它们都可能具有不同功能。因此，更建议使用 <code class="notranslate">DEC</code> 标识符。</p>
+</blockquote>
+<h2>清除功能</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">ESC 码标识符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="notranslate">ESC[J</code></td>
+<td align="left">从光标位置正向清除到右下角（默认为0）</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[0J</code></td>
+<td align="left">从光标位置正向清除到右下角</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[1J</code></td>
+<td align="left">从光标位置反向清除到左上角</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[2J</code></td>
+<td align="left">清屏</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[3J</code></td>
+<td align="left">清除所有行，包括屏幕外缓存着的、可供滚动的</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[K</code></td>
+<td align="left">从光标位置正向清除到行尾（默认为0）</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[0K</code></td>
+<td align="left">从光标位置正向清除到行尾</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[1K</code></td>
+<td align="left">从光标位置反向清除到行首</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[2K</code></td>
+<td align="left">清除光标所在整行</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<blockquote>
+<p>注意：清行之后光标固定，即光标将停留在该行被删除之前的位置。<br>
+您可以选择在清行后使用 <code class="notranslate">\r</code> 将光标返回到当前行首。</p>
+</blockquote>
+<h2>颜色 显示模式</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">ESC 码标识符</th>
+<th align="left">重置为默认标识符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="notranslate">ESC[1;34;{...}m</code></td>
+<td align="left"></td>
+<td align="left">设置单元格显示模式，用 (<code class="notranslate">;</code>) 分隔。</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[0m</code></td>
+<td align="left"></td>
+<td align="left">重置所有效果 (样式 和 颜色)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[1m</code></td>
+<td align="left"><code class="notranslate">ESC[22m</code></td>
+<td align="left">加粗</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[2m</code></td>
+<td align="left"><code class="notranslate">ESC[22m</code></td>
+<td align="left">变暗变模糊</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[3m</code></td>
+<td align="left"><code class="notranslate">ESC[23m</code></td>
+<td align="left">斜体</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[4m</code></td>
+<td align="left"><code class="notranslate">ESC[24m</code></td>
+<td align="left">下划线</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[5m</code></td>
+<td align="left"><code class="notranslate">ESC[25m</code></td>
+<td align="left">闪烁</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[7m</code></td>
+<td align="left"><code class="notranslate">ESC[27m</code></td>
+<td align="left">设置反向/反转模式</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[8m</code></td>
+<td align="left"><code class="notranslate">ESC[28m</code></td>
+<td align="left">设置隐藏/不可见模式</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[9m</code></td>
+<td align="left"><code class="notranslate">ESC[29m</code></td>
+<td align="left">删除线</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<blockquote>
+<p><strong>注意:</strong> 有些终端可能不支持上面的标识符操作。</p>
+</blockquote>
+<blockquote>
+<p><strong>注意:</strong> <code class="notranslate">ESC[1m</code> 和 <code class="notranslate">ESC[2m</code> 都可以用 <code class="notranslate">ESC[22m</code> 标识符重置。<br>
+<code class="notranslate">ESC[21m</code> 标识符 是双下划线模式的 <strong>非标准</strong> 标识符，仅在某些终端中工作，并使用 <code class="notranslate">ESC[24m</code> 重置。</p>
+</blockquote>
+<h3>颜色代码</h3>
+<p>大多数终端支持8色和16色，以及256（8位）色。这些颜色由用户设置，但具有通常定义的含义。<br>
+<code class="notranslate">tty</code> 一般只有8色，而 <code class="notranslate">pts</code> 一般有 256 色。</p>
+<h4>8-16 色</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">色</th>
+<th align="left">字体颜色</th>
+<th align="left">背景色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">黑</td>
+<td align="left"><code class="notranslate">30</code></td>
+<td align="left"><code class="notranslate">40</code></td>
+</tr>
+<tr>
+<td align="left">红</td>
+<td align="left"><code class="notranslate">31</code></td>
+<td align="left"><code class="notranslate">41</code></td>
+</tr>
+<tr>
+<td align="left">绿</td>
+<td align="left"><code class="notranslate">32</code></td>
+<td align="left"><code class="notranslate">42</code></td>
+</tr>
+<tr>
+<td align="left">黄</td>
+<td align="left"><code class="notranslate">33</code></td>
+<td align="left"><code class="notranslate">43</code></td>
+</tr>
+<tr>
+<td align="left">蓝</td>
+<td align="left"><code class="notranslate">34</code></td>
+<td align="left"><code class="notranslate">44</code></td>
+</tr>
+<tr>
+<td align="left">粉</td>
+<td align="left"><code class="notranslate">35</code></td>
+<td align="left"><code class="notranslate">45</code></td>
+</tr>
+<tr>
+<td align="left">青</td>
+<td align="left"><code class="notranslate">36</code></td>
+<td align="left"><code class="notranslate">46</code></td>
+</tr>
+<tr>
+<td align="left">白</td>
+<td align="left"><code class="notranslate">37</code></td>
+<td align="left"><code class="notranslate">47</code></td>
+</tr>
+<tr>
+<td align="left">默认</td>
+<td align="left"><code class="notranslate">39</code></td>
+<td align="left"><code class="notranslate">49</code></td>
+</tr>
+<tr>
+<td align="left">重置</td>
+<td align="left"><code class="notranslate">0</code></td>
+<td align="left"><code class="notranslate">0</code></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<blockquote>
+<p><strong>注意：</strong> <em>重置</em> 颜色 指：重置所有 <em>颜色</em> 和文本效果，使用 <em>默认</em> 颜色指：仅重置颜色。</p>
+</blockquote>
+<p>除了基本的8种颜色外，大多数终端还支持 <code class="notranslate">bright</code> 或 <code class="notranslate">bold</code> 的颜色。<br>
+如下例子：<br>
+<code class="notranslate">1;</code> 表示 <code class="notranslate">bright</code>，<code class="notranslate">2;</code> 表示 <code class="notranslate">bold</code>，</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 加粗，红色</span>
+<span class="pl-cce">\x</span>1b[1<span class="pl-k">;</span>31mHello
+<span class="pl-c"><span class="pl-c">#</span> 变暗，白色，红背景</span>
+<span class="pl-cce">\x</span>1b[2<span class="pl-k">;</span>37<span class="pl-k">;</span>41mWorld</pre></div>
+<p>一些终端支持<br>
+<a href="https://sites.ualberta.ca/dept/chemeng/AIX-43/share/man/info/C/a_doc_lib/cmds/aixcmds1/aixterm.htm" rel="nofollow">aixterm 规范</a>。<br>
+提供一些 不需要写加粗符 的 ISO 颜色的明亮版本：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">色</th>
+<th align="left">字体颜色</th>
+<th align="left">背景色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">粗黑</td>
+<td align="left"><code class="notranslate">90</code></td>
+<td align="left"><code class="notranslate">100</code></td>
+</tr>
+<tr>
+<td align="left">粗红</td>
+<td align="left"><code class="notranslate">91</code></td>
+<td align="left"><code class="notranslate">101</code></td>
+</tr>
+<tr>
+<td align="left">粗绿</td>
+<td align="left"><code class="notranslate">92</code></td>
+<td align="left"><code class="notranslate">102</code></td>
+</tr>
+<tr>
+<td align="left">粗黄</td>
+<td align="left"><code class="notranslate">93</code></td>
+<td align="left"><code class="notranslate">103</code></td>
+</tr>
+<tr>
+<td align="left">粗蓝</td>
+<td align="left"><code class="notranslate">94</code></td>
+<td align="left"><code class="notranslate">104</code></td>
+</tr>
+<tr>
+<td align="left">粗粉</td>
+<td align="left"><code class="notranslate">95</code></td>
+<td align="left"><code class="notranslate">105</code></td>
+</tr>
+<tr>
+<td align="left">粗青</td>
+<td align="left"><code class="notranslate">96</code></td>
+<td align="left"><code class="notranslate">106</code></td>
+</tr>
+<tr>
+<td align="left">粗白</td>
+<td align="left"><code class="notranslate">97</code></td>
+<td align="left"><code class="notranslate">107</code></td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h4>256 色</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">ESC 码标识符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="notranslate">ESC[38;5;{ID}m</code></td>
+<td align="left">设置字体颜色</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[48;5;{ID}m</code></td>
+<td align="left">设置背景色</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>自己对照着下图的 <code class="notranslate">{ID}</code> 来写从 0-255 的颜色表：</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://user-images.githubusercontent.com/995050/47952855-ecb12480-df75-11e8-89d4-ac26c50e80b9.png"><img src="https://user-images.githubusercontent.com/995050/47952855-ecb12480-df75-11e8-89d4-ac26c50e80b9.png" alt="256 Color table" style="max-width: 100%;"></a></p>
+<p>从上面提到的 16基础色（0-15） 开始。<br>
+将 216种颜色（16-231） / 3bpc RGB值 偏移 16 ，包装为单个色值。<br>
+最后 24种颜色（232-255） 为灰度值，从深到浅<br>
+一些终端仿真器将这些步长解释为所有三个通道上的线性增量（256 / 24）。</p>
+<h4>RGB 色</h4>
+<p>现代终端都支持 <a href="https://en.wikipedia.org/wiki/Color_depth#True_color_.2824-bit.29" rel="nofollow">真彩色</a> (24位 RGB)。</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">ESC 码标识符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="notranslate">ESC[38;2;{r};{g};{b}m</code></td>
+<td align="left">设置 RGB 字体颜色</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[48;2;{r};{g};{b}m</code></td>
+<td align="left">设置 RGB 背景色</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<blockquote>
+<p><strong>注意：</strong> <code class="notranslate">;38</code> 和 <code class="notranslate">;48</code> 对应于 16色 的冗余标识符，并由终端解释以分别设置前景和背景色。其中 <code class="notranslate">;2</code> 和 <code class="notranslate">;5</code> 作为设置颜色格式。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/8382efab-b552-4d53-ae83-2a381cd62782"><img src="https://github.com/user-attachments/assets/8382efab-b552-4d53-ae83-2a381cd62782" alt="image" style="max-width: 100%;"></a></p>
+<h2>屏幕功能</h2>
+<h3>设置显示模式</h3>
+<pre class="notranslate"><code class="notranslate">    TODO: 还没搞懂，之后再翻译补充
+</code></pre>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">ESC 码标识符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="notranslate">ESC[={值}h</code></td>
+<td align="left">Changes the screen width or type to the mode specified by value.</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=0h</code></td>
+<td align="left">40 x 25 monochrome (text)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=1h</code></td>
+<td align="left">40 x 25 color (text)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=2h</code></td>
+<td align="left">80 x 25 monochrome (text)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=3h</code></td>
+<td align="left">80 x 25 color (text)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=4h</code></td>
+<td align="left">320 x 200 4-color (graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=5h</code></td>
+<td align="left">320 x 200 monochrome (graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=6h</code></td>
+<td align="left">640 x 200 monochrome (graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=7h</code></td>
+<td align="left">Enables line wrapping</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=13h</code></td>
+<td align="left">320 x 200 color (graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=14h</code></td>
+<td align="left">640 x 200 color (16-color graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=15h</code></td>
+<td align="left">640 x 350 monochrome (2-color graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=16h</code></td>
+<td align="left">640 x 350 color (16-color graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=17h</code></td>
+<td align="left">640 x 480 monochrome (2-color graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=18h</code></td>
+<td align="left">640 x 480 color (16-color graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[=19h</code></td>
+<td align="left">320 x 200 color (256-color graphics)</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[={值}l</code></td>
+<td align="left">Resets the mode by using the same values that Set Mode uses, except for 7, which disables line wrapping. The last character in this escape sequence is a lowercase L.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h3>非标准 通用 功能</h3>
+<p>这些是 私有模式 的一些示例，它们没有在 <strong>规范</strong> 中定义，但在大多数终端中实现。</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">ESC 码标识符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code class="notranslate">ESC[?25l</code></td>
+<td align="left">隐藏光标</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[?25h</code></td>
+<td align="left">显示光标</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[?47l</code></td>
+<td align="left">恢复上一次保存的屏幕</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[?47h</code></td>
+<td align="left">保存屏幕</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[?1049h</code></td>
+<td align="left">启用备用缓冲区</td>
+</tr>
+<tr>
+<td align="left"><code class="notranslate">ESC[?1049l</code></td>
+<td align="left">关闭备用缓冲区</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>有关XTerm定义的私有模式的更详细列表，请参阅：<a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html" rel="nofollow">XTerm 控制标识符</a>。</p>
+<blockquote>
+<p>**注意: ** 虽然大多数终端可能支持这些模式，但有些模式可能不适用于 <code class="notranslate">tmux</code> 等多路复用器。</p>
+</blockquote>
+<h3>键盘码对应的字符串</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate">ESC[{code}<span class="pl-k">;</span>{string}<span class="pl-k">;</span>{...}p</pre></div>
+<p>将键盘键重新定义为指定的字符串。<br>
+此转义标识符的参数定义如下：</p>
+<ul>
+<li>
+<p><code class="notranslate">code</code> ：下表中列出的一个或多个值，一般为键盘键或组合键。<br>
+在命令中使用这些值时，除了 转义标识符 所需的 通配符 外，还必须键入下表中显示的 通配符 。<br>
+括号中的代码在 <strong>某些键盘</strong> 上不可用。<br>
+除非您在 <code class="notranslate">ANSI.SYS</code> 的 <code class="notranslate">DEVICE</code> 命令中指定 <code class="notranslate">/X</code> 开关，否则 <code class="notranslate">ANSI.SYS</code> 不会解释这些键盘的括号中的代码。</p>
+</li>
+<li>
+<p><code class="notranslate">string</code> ：是单个字符或包含在引号中的字符串的 ASCII 代码。例如，65和 "A" 都可以用来表示一个 <code class="notranslate">A</code> 。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>重要说明：</strong> 下表中的某些值并非对所有计算机都有效。最终解释交给你的计算机处理。   ：）</p>
+</blockquote>
+<h4>键盘码对应的字符串列表</h4>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>键</th>
+<th>CSI 码</th>
+<th>SHIFT+CSI码</th>
+<th>CTRL+CSI码</th>
+<th>ALT+CSI码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>0;59</td>
+<td>0;84</td>
+<td>0;94</td>
+<td>0;104</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>0;60</td>
+<td>0;85</td>
+<td>0;95</td>
+<td>0;105</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>0;61</td>
+<td>0;86</td>
+<td>0;96</td>
+<td>0;106</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>0;62</td>
+<td>0;87</td>
+<td>0;97</td>
+<td>0;107</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>0;63</td>
+<td>0;88</td>
+<td>0;98</td>
+<td>0;108</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>0;64</td>
+<td>0;89</td>
+<td>0;99</td>
+<td>0;109</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>0;65</td>
+<td>0;90</td>
+<td>0;100</td>
+<td>0;110</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>0;66</td>
+<td>0;91</td>
+<td>0;101</td>
+<td>0;111</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>0;67</td>
+<td>0;92</td>
+<td>0;102</td>
+<td>0;112</td>
+</tr>
+<tr>
+<td>F10</td>
+<td>0;68</td>
+<td>0;93</td>
+<td>0;103</td>
+<td>0;113</td>
+</tr>
+<tr>
+<td>F11</td>
+<td>0;133</td>
+<td>0;135</td>
+<td>0;137</td>
+<td>0;139</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>0;134</td>
+<td>0;136</td>
+<td>0;138</td>
+<td>0;140</td>
+</tr>
+<tr>
+<td>HOME (数字键盘部分)</td>
+<td>0;71</td>
+<td>55</td>
+<td>0;119</td>
+<td>--</td>
+</tr>
+<tr>
+<td>UP ARROW (数字键盘部分)</td>
+<td>0;72</td>
+<td>56</td>
+<td>(0;141)</td>
+<td>--</td>
+</tr>
+<tr>
+<td>PAGE UP (数字键盘部分)</td>
+<td>0;73</td>
+<td>57</td>
+<td>0;132</td>
+<td>--</td>
+</tr>
+<tr>
+<td>LEFT ARROW (数字键盘部分)</td>
+<td>0;75</td>
+<td>52</td>
+<td>0;115</td>
+<td>--</td>
+</tr>
+<tr>
+<td>RIGHT ARROW (数字键盘部分)</td>
+<td>0;77</td>
+<td>54</td>
+<td>0;116</td>
+<td>--</td>
+</tr>
+<tr>
+<td>END (数字键盘部分)</td>
+<td>0;79</td>
+<td>49</td>
+<td>0;117</td>
+<td>--</td>
+</tr>
+<tr>
+<td>DOWN ARROW (数字键盘部分)</td>
+<td>0;80</td>
+<td>50</td>
+<td>(0;145)</td>
+<td>--</td>
+</tr>
+<tr>
+<td>PAGE DOWN (数字键盘部分)</td>
+<td>0;81</td>
+<td>51</td>
+<td>0;118</td>
+<td>--</td>
+</tr>
+<tr>
+<td>INSERT (数字键盘部分)</td>
+<td>0;82</td>
+<td>48</td>
+<td>(0;146)</td>
+<td>--</td>
+</tr>
+<tr>
+<td>DELETE (数字键盘部分)</td>
+<td>0;83</td>
+<td>46</td>
+<td>(0;147)</td>
+<td>--</td>
+</tr>
+<tr>
+<td>HOME</td>
+<td>(224;71)</td>
+<td>(224;71)</td>
+<td>(224;119)</td>
+<td>(224;151)</td>
+</tr>
+<tr>
+<td>UP ARROW</td>
+<td>(224;72)</td>
+<td>(224;72)</td>
+<td>(224;141)</td>
+<td>(224;152)</td>
+</tr>
+<tr>
+<td>PAGE UP</td>
+<td>(224;73)</td>
+<td>(224;73)</td>
+<td>(224;132)</td>
+<td>(224;153)</td>
+</tr>
+<tr>
+<td>LEFT ARROW</td>
+<td>(224;75)</td>
+<td>(224;75)</td>
+<td>(224;115)</td>
+<td>(224;155)</td>
+</tr>
+<tr>
+<td>RIGHT ARROW</td>
+<td>(224;77)</td>
+<td>(224;77)</td>
+<td>(224;116)</td>
+<td>(224;157)</td>
+</tr>
+<tr>
+<td>END</td>
+<td>(224;79)</td>
+<td>(224;79)</td>
+<td>(224;117)</td>
+<td>(224;159)</td>
+</tr>
+<tr>
+<td>DOWN ARROW</td>
+<td>(224;80)</td>
+<td>(224;80)</td>
+<td>(224;145)</td>
+<td>(224;154)</td>
+</tr>
+<tr>
+<td>PAGE DOWN</td>
+<td>(224;81)</td>
+<td>(224;81)</td>
+<td>(224;118)</td>
+<td>(224;161)</td>
+</tr>
+<tr>
+<td>INSERT</td>
+<td>(224;82)</td>
+<td>(224;82)</td>
+<td>(224;146)</td>
+<td>(224;162)</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>(224;83)</td>
+<td>(224;83)</td>
+<td>(224;147)</td>
+<td>(224;163)</td>
+</tr>
+<tr>
+<td>PRINT SCREEN</td>
+<td>--</td>
+<td>--</td>
+<td>0;114</td>
+<td>--</td>
+</tr>
+<tr>
+<td>PAUSE/BREAK</td>
+<td>--</td>
+<td>--</td>
+<td>0;0</td>
+<td>--</td>
+</tr>
+<tr>
+<td>BACKSPACE</td>
+<td>8</td>
+<td>8</td>
+<td>127</td>
+<td>(0)</td>
+</tr>
+<tr>
+<td>ENTER</td>
+<td>13</td>
+<td>--</td>
+<td>10</td>
+<td>(0</td>
+</tr>
+<tr>
+<td>TAB</td>
+<td>9</td>
+<td>0;15</td>
+<td>(0;148)</td>
+<td>(0;165)</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>0;3</td>
+<td>--</td>
+<td>--</td>
+<td>--</td>
+</tr>
+<tr>
+<td>A</td>
+<td>97</td>
+<td>65</td>
+<td>1</td>
+<td>0;30</td>
+</tr>
+<tr>
+<td>B</td>
+<td>98</td>
+<td>66</td>
+<td>2</td>
+<td>0;48</td>
+</tr>
+<tr>
+<td>C</td>
+<td>99</td>
+<td>66</td>
+<td>3</td>
+<td>0;46</td>
+</tr>
+<tr>
+<td>D</td>
+<td>100</td>
+<td>68</td>
+<td>4</td>
+<td>0;32</td>
+</tr>
+<tr>
+<td>E</td>
+<td>101</td>
+<td>69</td>
+<td>5</td>
+<td>0;18</td>
+</tr>
+<tr>
+<td>F</td>
+<td>102</td>
+<td>70</td>
+<td>6</td>
+<td>0;33</td>
+</tr>
+<tr>
+<td>G</td>
+<td>103</td>
+<td>71</td>
+<td>7</td>
+<td>0;34</td>
+</tr>
+<tr>
+<td>H</td>
+<td>104</td>
+<td>72</td>
+<td>8</td>
+<td>0;35</td>
+</tr>
+<tr>
+<td>I</td>
+<td>105</td>
+<td>73</td>
+<td>9</td>
+<td>0;23</td>
+</tr>
+<tr>
+<td>J</td>
+<td>106</td>
+<td>74</td>
+<td>10</td>
+<td>0;36</td>
+</tr>
+<tr>
+<td>K</td>
+<td>107</td>
+<td>75</td>
+<td>11</td>
+<td>0;37</td>
+</tr>
+<tr>
+<td>L</td>
+<td>108</td>
+<td>76</td>
+<td>12</td>
+<td>0;38</td>
+</tr>
+<tr>
+<td>M</td>
+<td>109</td>
+<td>77</td>
+<td>13</td>
+<td>0;50</td>
+</tr>
+<tr>
+<td>N</td>
+<td>110</td>
+<td>78</td>
+<td>14</td>
+<td>0;49</td>
+</tr>
+<tr>
+<td>O</td>
+<td>111</td>
+<td>79</td>
+<td>15</td>
+<td>0;24</td>
+</tr>
+<tr>
+<td>P</td>
+<td>112</td>
+<td>80</td>
+<td>16</td>
+<td>0;25</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>113</td>
+<td>81</td>
+<td>17</td>
+<td>0;16</td>
+</tr>
+<tr>
+<td>R</td>
+<td>114</td>
+<td>82</td>
+<td>18</td>
+<td>0;19</td>
+</tr>
+<tr>
+<td>S</td>
+<td>115</td>
+<td>83</td>
+<td>19</td>
+<td>0;31</td>
+</tr>
+<tr>
+<td>T</td>
+<td>116</td>
+<td>84</td>
+<td>20</td>
+<td>0;20</td>
+</tr>
+<tr>
+<td>U</td>
+<td>117</td>
+<td>85</td>
+<td>21</td>
+<td>0;22</td>
+</tr>
+<tr>
+<td>V</td>
+<td>118</td>
+<td>86</td>
+<td>22</td>
+<td>0;47</td>
+</tr>
+<tr>
+<td>W</td>
+<td>119</td>
+<td>87</td>
+<td>23</td>
+<td>0;17</td>
+</tr>
+<tr>
+<td>X</td>
+<td>120</td>
+<td>88</td>
+<td>24</td>
+<td>0;45</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>121</td>
+<td>89</td>
+<td>25</td>
+<td>0;21</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>122</td>
+<td>90</td>
+<td>26</td>
+<td>0;44</td>
+</tr>
+<tr>
+<td>1</td>
+<td>49</td>
+<td>33</td>
+<td>--</td>
+<td>0;120</td>
+</tr>
+<tr>
+<td>2</td>
+<td>50</td>
+<td>64</td>
+<td>0</td>
+<td>0;121</td>
+</tr>
+<tr>
+<td>3</td>
+<td>51</td>
+<td>35</td>
+<td>--</td>
+<td>0;122</td>
+</tr>
+<tr>
+<td>4</td>
+<td>52</td>
+<td>36</td>
+<td>--</td>
+<td>0;123</td>
+</tr>
+<tr>
+<td>5</td>
+<td>53</td>
+<td>37</td>
+<td>--</td>
+<td>0;124</td>
+</tr>
+<tr>
+<td>6</td>
+<td>54</td>
+<td>94</td>
+<td>30</td>
+<td>0;125</td>
+</tr>
+<tr>
+<td>7</td>
+<td>55</td>
+<td>38</td>
+<td>--</td>
+<td>0;126</td>
+</tr>
+<tr>
+<td>8</td>
+<td>56</td>
+<td>42</td>
+<td>--</td>
+<td>0;126</td>
+</tr>
+<tr>
+<td>9</td>
+<td>57</td>
+<td>40</td>
+<td>--</td>
+<td>0;127</td>
+</tr>
+<tr>
+<td>0</td>
+<td>48</td>
+<td>41</td>
+<td>--</td>
+<td>0;129</td>
+</tr>
+<tr>
+<td>-</td>
+<td>45</td>
+<td>95</td>
+<td>31</td>
+<td>0;130</td>
+</tr>
+<tr>
+<td>=</td>
+<td>61</td>
+<td>43</td>
+<td>---</td>
+<td>0;131</td>
+</tr>
+<tr>
+<td>[</td>
+<td>91</td>
+<td>123</td>
+<td>27</td>
+<td>0;26</td>
+</tr>
+<tr>
+<td>]</td>
+<td>93</td>
+<td>125</td>
+<td>29</td>
+<td>0;27</td>
+</tr>
+<tr>
+<td></td>
+<td>92</td>
+<td>124</td>
+<td>28</td>
+<td>0;43</td>
+</tr>
+<tr>
+<td>;</td>
+<td>59</td>
+<td>58</td>
+<td>--</td>
+<td>0;39</td>
+</tr>
+<tr>
+<td>'</td>
+<td>39</td>
+<td>34</td>
+<td>--</td>
+<td>0;40</td>
+</tr>
+<tr>
+<td>,</td>
+<td>44</td>
+<td>60</td>
+<td>--</td>
+<td>0;51</td>
+</tr>
+<tr>
+<td>.</td>
+<td>46</td>
+<td>62</td>
+<td>--</td>
+<td>0;52</td>
+</tr>
+<tr>
+<td>/</td>
+<td>47</td>
+<td>63</td>
+<td>--</td>
+<td>0;53</td>
+</tr>
+<tr>
+<td>`</td>
+<td>96</td>
+<td>126</td>
+<td>--</td>
+<td>(0;41)</td>
+</tr>
+<tr>
+<td>ENTER (额外键盘部分)</td>
+<td>13</td>
+<td>--</td>
+<td>10</td>
+<td>(0;166)</td>
+</tr>
+<tr>
+<td>/ (额外键盘部分)</td>
+<td>47</td>
+<td>47</td>
+<td>(0;142)</td>
+<td>(0;74)</td>
+</tr>
+<tr>
+<td>* (额外键盘部分)</td>
+<td>42</td>
+<td>(0;144)</td>
+<td>(0;78)</td>
+<td>--</td>
+</tr>
+<tr>
+<td>- (额外键盘部分)</td>
+<td>45</td>
+<td>45</td>
+<td>(0;149)</td>
+<td>(0;164)</td>
+</tr>
+<tr>
+<td>+ (额外键盘部分)</td>
+<td>43</td>
+<td>43</td>
+<td>(0;150)</td>
+<td>(0;55)</td>
+</tr>
+<tr>
+<td>5 (额外键盘部分)</td>
+<td>(0;76)</td>
+<td>53</td>
+<td>(0;143)</td>
+<td>--</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>鸣谢</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/ANSI_escape_code" rel="nofollow">Wikipedia: ANSI escape code</a></li>
+<li><a href="http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html" rel="nofollow">Build your own Command Line with ANSI escape codes</a></li>
+<li><a href="http://ascii-table.com/ansi-escape-sequences.php" rel="nofollow">ascii-table: ANSI Escape sequences</a></li>
+<li><a href="https://bluesock.org/~willkg/dev/ansi.html" rel="nofollow">bluesock: ansi codes</a></li>
+<li><a href="http://wiki.bash-hackers.org/scripting/terminalcodes" rel="nofollow">bash-hackers: Terminal Codes (ANSI/VT100) introduction</a></li>
+<li><a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html" rel="nofollow">XTerm Control Sequences</a></li>
+<li><a href="https://vt100.net/" rel="nofollow">VT100 – Various terminal manuals</a></li>
+<li><a href="https://xtermjs.org/docs/api/vtfeatures/" rel="nofollow">xterm.js – Supported Terminal Sequences</a></li>
+</ul></div>
+<div style="font-size:small;margin-top:8px;float:right;">转载请注明出处，好人一生平胸</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Bemly.github.io/blog-meekdai">蓝莓小果冻的博客</a></div>
+<div id="footer2"><span id="filingNum"><a href="https://beian.miit.gov.cn/" target="_blank">萌ICP备20242029号</a> • </span>
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("08/24/2024"!=""){
+    var startSite=new Date("08/24/2024");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Bemly/blog-meekdai");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
