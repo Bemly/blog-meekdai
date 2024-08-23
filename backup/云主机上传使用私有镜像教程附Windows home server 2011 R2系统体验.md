@@ -1,3 +1,196 @@
+# 欢迎来到本博客！
+
+哈哈 用了octokit 小章鱼的api 和 marked md解释器，毕竟我一个人搞不定嘛233
+
+采用issue当作文章的地方来用哦
+
+暂时先这样 先把萌国ICP过了wwww 希望不要大寄特寄Orz
+
+本项目：https://github.com/Bemly/Web-IssueInk
+
+有空写几句玩玩，之后上框架/自己轮子 南北同时动工（bushi
+
+欢迎star 嘤嘤嘤
+
+现在这里寒酸列一下我个人网站的目录吧 方便过审，毕竟主页现在连css都没创哈哈哈
+
+# 顺便说下 暂时先别仓库下面提其他的issue，我还没做筛选，别把我挤下去了！！！
+
+## 实时解析比一堆构建工具好多惹
+
+## index 索引 静态网站
+
+感谢域名提供商Porkbun的打折券：https://porkbun.bemly.moe
+
+感谢国服steam没有类似steamdb.info的服务，让我写了个价格比较网站：https://steam.bemly.moe
+
+感谢华为35块钱一年的1M袖珍小主机，可惜上面的10+项目已经把主机跑崩了可恶：https://jump.bemly.moe
+
+感谢MC带给我无穷的快乐ruanya：https://archive.bemly.moe/1.9.0.10PDT
+
+感谢心血来潮搭了个3d博客又懒得放内容更新的自己：https://3d.bemly.moe
+
+感谢自己做的第一个博客：https://archive.bemly.moe/
+
+还在备案，最痛苦的一集：https://bemly.top
+
+鸣谢 @Sky_凌空 https://archive.bemly.moe/JsonAdd-on.html 不知道从哪个旮旯翻出来的（
+
+![看不见我](https://raw.githubusercontent.com/Bemly/Script-OneMelody/master/%E6%9C%AA%E5%91%BD%E5%90%8D.bmp)
+
+## index 索引 动态网站
+
+已经全宕机了，都是你害的，哼唧
+
+来个悄悄话
+发博客还可以蹭issue 一举两得  （🤫
+
+## 和我聊天！！！我好寂寞的
+
+1. 电报：https://t.me/citronbemly
+2. 下面从之前项目扒下来的，自己开自己盒专用，蚌埠住了
+
+//国内
+URL.BiliBili = 'https://space.bilibili.com/259928976';
+boxTexture.BiliBili = '../src/jsm/pilipala.jpg';
+URL.QQ = 'https://qun.qq.com/qqweb/qunpro/share?_wv=3&_wwv=128&appChannel=share&inviteCode=xsua&appChannel=share&businessType=9&from=246610&biz=ka';
+boxTexture.QQ = '../src/jsm/QQ.jpg';
+URL.qq = 'https://qm.qq.com/cgi-bin/qm/qr?k=q6ucHSu8h3SDQEAKIWlat9ebbvl_hk9E&noverify=0';
+boxTexture.qq = '';
+URL.wechat = 'https://u.wechat.com/MCBiavAkTUX-4z9yeqEkTrQ';
+boxTexture.wechat = '';
+URL.weibo = 'https://weibo.com/u/7558867861';
+boxTexture.weibo = '';
+URL.taptap = 'https://www.taptap.com/user/3557555';
+boxTexture.taptap = '';
+URL.taptapglobal = 'https://www.taptap.io/user/464746820';
+boxTexture.taptapglobal = '';
+URL.afdian = 'https://afdian.net/u/f8d9ae60f94511ec9c1b52540025c377';
+boxTexture.afdian = '';
+URL.lofter = 'https://bemly.lofter.com/ https://lanmeixiaoguodong.lofter.com/';
+boxTexture.lofter = '';
+URL.coolapk = 'https://www.coolapk.com/u/2648780';
+boxTexture.coolapk = '';
+URL.bbs360 = 'https://bbs.360.cn/space-uid-51195310.html';
+boxTexture.bbs360 = '';
+URL.unity = 'https://developer.unity.cn/u/ben-mu-li-bemly?tab=personalDynamic';
+boxTexture.unity = '';
+
+//mc
+URL.neteaseMC = 'http://mc.netease.com/?5398';
+boxTexture.neteaseMC = '';
+URL.mcbbs = 'https://www.mcbbs.net/?1098910';
+boxTexture.mcbbs = '';
+URL.minebbs = 'https://www.minebbs.com/members/bemly_.44704/';
+boxTexture.minebbs = '';
+URL.klpbbs = 'https://klpbbs.com/space-uid-472918.html';
+boxTexture.klpbbs = '';
+
+//游戏平台
+URL.Xbox = '好友代码:blueberryLanmei';
+boxTexture.Xbox = '';
+URL.steam = 'https://steamcommunity.com/id/bemlychina';
+boxTexture.steam = '';
+URL.epic = '好友代码:本木栗Bemly_';
+boxTexture.epic = '';
+URL.apex = '好友代码:Bemly#4200';
+boxTexture.epic = '';
+URL.parsec = '好友代码:Bemly#10185871、好友代码:Bemly#10186114';
+boxTexture.parsec = '';
+URL.hoyolab = 'https://www.hoyolab.com/accountCenter/postList?id=239388997';
+boxTexture.hoyolab = '';
+
+//国外
+URL.gitHub = 'https://github.com/CitronBemly';
+boxTexture.Github = '../src/jsm/githubLogo.png';
+URL.discord = 'https://discord.gg/dy29csgeAs';
+boxTexture.discord = '';
+URL.reddit = 'https://www.reddit.com/user/bemly_';
+boxTexture.reddit = '';
+URL.twitter = 'https://twitter.com/bemly_';
+boxTexture.twitter = '';
+URL.youtuber = 'https://www.youtube.com/channel/UCPGcRCcfBIZBmT5-WIqV3Rg';
+boxTexture.youtuber = '';
+URL.telegram = 'https://t.me/citronbemly';
+boxTexture.telegram = '';
+URL.VK = 'https://vk.com/bemly';
+boxTexture.VK = '';
+URL.facebook = 'https://www.facebook.com/citronbemly';
+boxTexture.facebook = '';
+URL.mega = 'https://mega.nz/C!TtAWFDrb';
+
+
+## 给他一个友链 他能连接全世界
+
+- [x] 小意rsesot sama！
+
+- 国服： https://rsesot.cn
+
+- 聊天室：https://sakura.ci/
+
+- 国际服博客！：https://neko.ci/
+misskey强力驱动，之前在这里写了 2021/2/19 20:43:07 (3 年前)
+2021-2023 TODO: 之后计划继续写着走
+
+- [x] 蔡喵喵！CAIMEO moew~
+
+- https://caimeo.online/
+
+- [x] xtex酱
+
+- https://xtexx.eu.org/
+
+- [x] 岩松同志还真是喜欢暴露自己的ip呢，这辈子就是被暴露癖给嗐了（滑稽
+
+-  https://www.0xav10086.site
+
+
+## 抄自己的PROFILE README哈哈
+
+
+草 latex公式解析不了 之后用katex处理吧，你先别急，让我先急，好急，好急
+
+$$
+\text{Life} = \int_\text{birth}^{\text{death}} \text{study} \ dt
+$$
+
+个性签名：做一个尘世闲游的有趣灵魂
+
+A whimsical soul wandering through the mundane, reveling in the charm of life's leisurely journey. 
+
+![OctocatGif](https://github.com/images/mona-whisper.gif)
+
+太可爱了吧，吉布图章鱼猫，想Rua Nya!
+
+Here hasn't been decided what to put yet, let's go to https://bemly.moe first! QwQ~
+
+
+## ------这里是古老的分割线 下面是页脚 认真的 不开玩笑！
+
+<a href="https://icp.gov.moe/?keyword=20242029" target="_blank">萌ICP备20242029号</a>
+
+
+![屏幕截图 2024-02-07 231134](https://github.com/Bemly/Web-IssueInk/assets/48025099/6f8e2c7b-0281-40a6-819f-4a4d968a8d20)
+
+![图片](https://github.com/Bemly/Web-IssueInk/assets/48025099/59b4b74d-1491-4f84-8e3c-3224309d5d0b)
+![a375800242d39a0222cc4e80d9fefc97](https://github.com/Bemly/Web-IssueInk/assets/48025099/92aa96c8-166d-4067-8843-940b95ad944a)
+![853db0d7c43394deaa125fe8ab408537](https://github.com/Bemly/Web-IssueInk/assets/48025099/bba3da33-3531-41f7-bcce-a4abbef11944)
+最近事情有点多，再加上最近品鉴了太多史一样的二游，精神冲击有点大，让我缓缓先
+
+不知不觉github变相变成图床力可还行（
+
+之后有空列个计划表吧 用博客把小绿墙涂满 嘿嘿
+
+- [ ] bewlybewly插件移植到firefox上
+- [ ] osx上云计划
+- [ ] 黑苹果EFI制作蓄意中
+- [ ] 博客issueink css制作
+- [x] Windows home server 2011上云 体验
+
+目前进度：
+- [ ] 京东读书epub解密 卡在random惹
+- [ ] 迁移unraid项目
+
 终于憋出来了（（（
 
 完整视频将会放在小号捏
@@ -13,6 +206,8 @@ Windows home server 2011 R2的远端web管理+繁体支持真是美妙呐
 ## 踩雷：
 
 1、原装镜像需要160G空间才能安装，这里直接用pe安装+建立引导大法了
+
+
 
 2、镜像服务IMG 桶OBS 都需要和镜像HECS(VPS)一个区域哟，不然搬迁还很麻烦
 
