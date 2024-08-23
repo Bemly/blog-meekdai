@@ -1,2 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://Meekdai.github.io/Gmeek-template</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://Meekdai.github.io/Gmeek-template</link></image><lastBuildDate>Thu, 14 Mar 2024 09:17:29 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>请接着之后的安装步骤执行</title><link>https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</link><description>如果你点击了`READM.md`的链接后，看到了这个页面，请继续之后的安装步骤执行。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</guid><pubDate>Thu, 14 Mar 2024 09:15:10 +0000</pubDate></item><item><title>这是Gmeek模板仓库</title><link>https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</link><description>通过这个模板创建库，可以大大减少部署Gmeek博客的配置步骤。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</guid><pubDate>Wed, 20 Dec 2023 07:42:24 +0000</pubDate></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>蓝莓小果冻的博客</title><link>https://Bemly.github.io/blog-meekdai</link><description>一个喜欢尝鲜却苦于没有技术的小透明
+此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动</description><copyright>蓝莓小果冻的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/48025099?v=4&amp;size=64</url><title>avatar</title><link>https://Bemly.github.io/blog-meekdai</link></image><lastBuildDate>Fri, 23 Aug 2024 18:10:14 +0000</lastBuildDate><managingEditor>蓝莓小果冻的博客</managingEditor><ttl>60</ttl><webMaster>蓝莓小果冻的博客</webMaster><item><title>js模块化建设历史：AMD、CJS、UMD、ESM</title><link>https://Bemly.github.io/blog-meekdai/post/js-mo-kuai-hua-jian-she-li-shi-%EF%BC%9AAMD%E3%80%81CJS%E3%80%81UMD%E3%80%81ESM.html</link><description>## 起初&#13;
+&#13;
+最开始的js是用于浏览器的快速脚本语言&#13;
+&#13;
+动态、宽松语法让许多代码得于以BUG的方式运行起来（（（&#13;
+&#13;
+但是最开始作为一个脚本语言，并没有考虑到js发展规模之快，以至于ES标准起初没有模块化的要求&#13;
+&#13;
+随着外部js引入的逐渐增多，各类js的变量出现了冲突&#13;
+&#13;
+为了解决这个办法，一部分是通过闭包，将自己的变量封装在一个大家基本不会使用的变量名上&#13;
+&#13;
+比如 jQuery 这名老将，就以自己独特的占有率占用了$这个大变量&#13;
+&#13;
+模块一多就不太好管理了，譬如现在的Node.js的npm一拉取webpack差不多就有150多个包&#13;
+&#13;
+这么多模块的变量冲突在处理依赖的时间恐怕要比实际引入开发多得多&#13;
+&#13;
+此时除了手动闭包冒出变量之外有了新的选择：那就是采用AMD加载器&#13;
+&#13;
+例如像使用 RequireJS 这种 AMD 加载器，利用define()语法来&#13;
+&#13;
+自动化帮我们闭包封装各自所需要的模块。</description><guid isPermaLink="true">https://Bemly.github.io/blog-meekdai/post/js-mo-kuai-hua-jian-she-li-shi-%EF%BC%9AAMD%E3%80%81CJS%E3%80%81UMD%E3%80%81ESM.html</guid><pubDate>Fri, 23 Aug 2024 18:09:47 +0000</pubDate></item></channel></rss>
