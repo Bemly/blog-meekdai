@@ -2,5 +2,12 @@
     "title":"蓝莓小果冻的博客",
     "subTitle":"一个喜欢尝鲜却苦于没有技术的小透明\n此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动",
     "avatarUrl":"https://avatars.githubusercontent.com/u/48025099?v=4&size=64",
+    "email":"bemly_@petalmail.com",
+    "filingNum":"萌ICP备20242029号",
+    "startSite":"08/24/2024",
+    "bottomText":"转载请注明出处，好人一生平胸",
+    "urlMode":"issue",
+    "needComment":1,
+    "primerCSS":"<link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />",
     "GMEEK_VERSION":"last"
 }
