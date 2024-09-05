@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>蓝莓小果冻的博客</title><link>https://Bemly.github.io/blog-meekdai</link><description>一个喜欢尝鲜却苦于没有技术的小透明&lt;br /&gt;此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动</description><copyright>蓝莓小果冻的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/48025099?v=4&amp;size=64</url><title>avatar</title><link>https://Bemly.github.io/blog-meekdai</link></image><lastBuildDate>Tue, 27 Aug 2024 16:22:31 +0000</lastBuildDate><managingEditor>蓝莓小果冻的博客</managingEditor><ttl>60</ttl><webMaster>蓝莓小果冻的博客</webMaster><item><title>avaloniaui axaml click绑定不了 View 视图下的解决方法</title><link>https://Bemly.github.io/blog-meekdai/post/avaloniaui%20axaml%20click-bang-ding-bu-le-%20View%20-shi-tu-xia-de-jie-jue-fang-fa.html</link><description>## 开端&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>蓝莓小果冻的博客</title><link>https://Bemly.github.io/blog-meekdai</link><description>一个喜欢尝鲜却苦于没有技术的小透明&lt;br /&gt;此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动</description><copyright>蓝莓小果冻的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/48025099?v=4&amp;size=64</url><title>avatar</title><link>https://Bemly.github.io/blog-meekdai</link></image><lastBuildDate>Thu, 05 Sep 2024 09:39:33 +0000</lastBuildDate><managingEditor>蓝莓小果冻的博客</managingEditor><ttl>60</ttl><webMaster>蓝莓小果冻的博客</webMaster><item><title>白嫖 SSL 证书加密网站指南</title><link>https://Bemly.github.io/blog-meekdai/post/bai-piao-%20SSL%20-zheng-shu-jia-mi-wang-zhan-zhi-nan.html</link><description>### 选择&#13;
+&#13;
+首先选择一个合适的 SSL 白嫖网站，市面上的付费 SSL 先略过：&#13;
+&#13;
+- [Comodo](https://www.comodo.com/)&#13;
+- [腾讯云](https://cloud.tencent.com/product/ssl)&#13;
+- [阿里云](https://www.aliyun.com/product/cas)&#13;
+- [Global Sign](https://www.globalsign.com)&#13;
+- [Digicert](https://www.digicert.com/) *付费常用&#13;
+- [moe SSL](https://get.ssl.moe) *SakuraFrp 推荐的ACGN味特浓的证书&#13;
+&#13;
+下面是一些提供免费 SSL 注册的服务商，因为Let's Encrypt白嫖怪众多，目前信任链会在 今年 9 月左右废弃。</description><guid isPermaLink="true">https://Bemly.github.io/blog-meekdai/post/bai-piao-%20SSL%20-zheng-shu-jia-mi-wang-zhan-zhi-nan.html</guid><pubDate>Thu, 05 Sep 2024 09:39:08 +0000</pubDate></item><item><title>avaloniaui axaml click绑定不了 View 视图下的解决方法</title><link>https://Bemly.github.io/blog-meekdai/post/avaloniaui%20axaml%20click-bang-ding-bu-le-%20View%20-shi-tu-xia-de-jie-jue-fang-fa.html</link><description>## 开端&#13;
 &#13;
 https://docs.avaloniaui.net/zh-Hans/docs/get-started/test-drive/respond-to-an-event&#13;
 &#13;
