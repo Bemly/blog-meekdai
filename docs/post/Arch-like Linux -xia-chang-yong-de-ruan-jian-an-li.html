@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/48025099?v=4&size=64"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="详细我已经整理为了一个仓库 https://github.com/Bemly/dotfiles-EOS
+
+可以作为主题即开即用捏www
+
+![](https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/2.png)
+![](https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/1.png)
+
+  收录了一些本喵日常使用的炒鸡好用的Linux工具集合，主要存放我的一些配置文件用来备份。">
+<meta property="og:title" content="Arch-like Linux 下常用的软件安利">
+<meta property="og:description" content="详细我已经整理为了一个仓库 https://github.com/Bemly/dotfiles-EOS
+
+可以作为主题即开即用捏www
+
+![](https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/2.png)
+![](https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/1.png)
+
+  收录了一些本喵日常使用的炒鸡好用的Linux工具集合，主要存放我的一些配置文件用来备份。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Bemly.github.io/blog-meekdai/post/Arch-like%20Linux%20-xia-chang-yong-de-ruan-jian-an-li.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/48025099?v=4&size=64">
+<title>Arch-like Linux 下常用的软件安利</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">Arch-like Linux 下常用的软件安利</h1>
+<div class="title-right">
+    <a href="https://Bemly.github.io/blog-meekdai" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Bemly/blog-meekdai/issues/11" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>详细我已经整理为了一个仓库 <a href="https://github.com/Bemly/dotfiles-EOS">https://github.com/Bemly/dotfiles-EOS</a></p>
+<p>可以作为主题即开即用捏www</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/2.png"><img src="https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/2.png" alt="" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/1.png"><img src="https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/1.png" alt="" style="max-width: 100%;"></a></p>
+<p>收录了一些本喵日常使用的炒鸡好用的Linux工具集合，主要存放我的一些配置文件用来备份。</p>
+<p>从 Manjaro + i3wm (非官方维护) 换下来，主要是 <strong>Arch 邪教</strong> 好像对 mos 的私有源颇有微词</p>
+<p>说实话中国镜像基本没有，所以就来投奔 默认使用官方源 的 EndeavourOS 拉</p>
+<p>正好顺带换个支持 XWayland 层兼容的 Hyprland 混成器 玩玩</p>
+<p>Hyprland 和 EndeavourOS 适合小白，比 archinstall 还无脑，墙烈安利</p>
+<p>顺带一体用了 Arch 才知道，arch 社区维护的包是真的多，直接无脑一行 pacman -Syy 就完事了</p>
+<p>在 Arch 上面基本不怎么考虑 flatpak 了（ 其他系统上的深度 flatpak 用户 :3 ）</p>
+<h3>窗口管理器</h3>
+<p>Hyprland Hyprshot Hyprpaper Waypaper 一体，包含截图、壁纸一体了，个人不是很喜欢任务栏就没要waybar</p>
+<h3>字体</h3>
+<p>sarasa - 舒服的开源汉字字体 更纱</p>
+<p>iosevka-term - 宽度很窄的字体，一行可以放更多，适合我这样的代码异端(?)</p>
+<h3>软件包管理器</h3>
+<p>flatpak -  跨类Unix平台的软件包管理器，不用说，豪用、必用</p>
+<p>paru - 现代的 Arch Pacman 包管理工具，Rust编写</p>
+<h3>Shell 终端</h3>
+<p>besh - 自己用Rust瞎写的，正在完善利用Libc库包的unsafe shell ( 自己写的，哭着也要用下去</p>
+<p>fish - 好吧，上面那个基本没怎么碰过，fish主力 名字好听，尝鲜用</p>
+<p>fisher - fish 插件管理器</p>
+<p>tide - fish 美化</p>
+<p>pwsh - PowerShell 不得不尝</p>
+<h3>虚拟机/容器</h3>
+<p>podman - 红帽的容器平台，Docker 容器国内最近被制裁了，换个口味</p>
+<p>qemu-KVM - Linux常用的虚拟化软件</p>
+<p>bottles - 快捷wine环境部署</p>
+<p>a-anime-game-launcher - 启动！Proton 兼容层，DXVK 转义 统统启动</p>
+<p>xdroid - 国产Android容器</p>
+<h3>Terminal 终端</h3>
+<p>kitty - Hyprland官方推荐，透明和亚克力效果对Hyprpaper这些的兼容性很好，就用了</p>
+<p>wezterm - Rust编写的 GPU 友好终端，不过纯 X11 环境下运行才正常，Wayland 对 N卡 支持太差，目前已知的就是光标不动，刷新会降到 0.2 FPS，非常难受</p>
+<h3>浏览器</h3>
+<p>Ladybird - 开源自由浏览器，能用</p>
+<p>servo - mozilla 提出的由 Rust 开发的下一代 Gecko 浏览器引擎, 维护缓慢</p>
+<p>firefox</p>
+<h3>输入法</h3>
+<p>fcitx - 不用ibus，对wayland兼容问题较多，主要是想尝一下百度输入法 for linux</p>
+<p>baidu-qimpanel - 基于fcitx的百度输入法，支持云输入，第三方维护（已过时但能跑）</p>
+<p>rime + rime-ice - 雾凇词库，候选热词不多，但也能用</p>
+<h3>任务管理器</h3>
+<p>btop++ - 炒好看的TUI任务管理器</p>
+<p>mangohud - 对标微星小飞机的占用叠加层，OpenGL需要加上--dlsym参数叠加</p>
+<p>system-monitoring-center - 类似windows，但远胜过windows的任务管理器</p>
+<h3>引导</h3>
+<p>systemd-boot - 很快昂，装的时候忘记美化没要GRUB，现在看上去挺简洁的(</p>
+<h3>图片查看器/资源管理器/播放器/小玩具</h3>
+<p>viu - 支持kitty wezterm这些pts的图像输出 图片查看器</p>
+<p>nnn/xplr - TUI 的资源管理器</p>
+<p>btrfs duf - 可视化占用百分比</p>
+<p>baka-mplayer - 一个非常9 智慧的播放器</p>
+<p>mpv vlc - 两套非常经典的视频播放器组合拳</p>
+<p>neofetch/screenfetch - 灵魂(?</p>
+<p>nmcil/nmtui - 非常直观好用的代替iw的 网络管理器</p>
+<p>bat - 有行数的cat</p>
+<h3>编辑器</h3>
+<p>neovim - 纯键盘的天下，搭配上主题非常好看，个人不是很能上手vim，当玩具摆放了</p>
+<p>helix - Rust 构建的 下一代 VIM 编辑器，玩具</p>
+<p>code - vsc 轻量级编辑器，平时修改一些小东西非常适合</p>
+<p>jetbrains-ide - 全家桶，开箱即用，jvm 跨平台</p>
+<p>zed - 新鲜的IDE，目前刚开放Linux版本，支持MACOS和类Unix，直接爽玩</p>
+<h3>聊天</h3>
+<p>matrix linuxqq</p>
+<p>paperplane - rust重写的电报第三方客户端</p>
+<h3>办公</h3>
+<p>wps-office - qt写的，跨平台，ui好看也兼容文档，完美的 msoffice 平替</p>
+<p>obs-studio - 串流还是录屏都好，搭配 pipewire，但是pw好像对wayland兼容不太好，流容易卡住</p>
+<p>lceda-pro gimp gtk krita postman wireshark</p>
+<h3>游戏启动器</h3>
+<p>minecraft-launcher - Hyprland上面运行有bug, electron写的</p>
+<p>hmcl-bin - 老牌启动器，支持neoforge、quilt等新兴模组加载器</p>
+<p>ymcl - 基于 pyqt 的跨平台 云母 风格启动器 Microsoft Fluent Design</p>
+<p>multimc - 模组调试、开发常用这个玩，日志高亮比较全</p>
+<h3>音乐</h3>
+<p>netease-music-tui music-box - 两个用网易云音乐的TUI播放器</p>
+<p>osu-lazer - 音乐播放器 确信</p>
+<h3>剪贴板</h3>
+<p>? 还没用 先熬下</p>
+<h3>小插曲</h3>
+<p>无聊随便写写，之后搬进博客</p>
+<p>入坑类Unix尝鲜顺序：</p>
+<ol>
+<li>
+<p>Phoenix OS</p>
+</li>
+<li>
+<p>Deepin V15 (最好的一代 DDE)</p>
+</li>
+<li>
+<p>Centos 7</p>
+</li>
+<li>
+<p>Ubuntu 20.04/Alpine OS</p>
+</li>
+<li>
+<p>Openfyde</p>
+</li>
+<li>
+<p>Zorin OS 16 Pro</p>
+</li>
+<li>
+<p>Pop! os 22.04 LTS</p>
+</li>
+<li>
+<p>Manjaro</p>
+</li>
+</ol></div>
+<div style="font-size:small;margin-top:8px;float:right;">转载请注明出处，好人一生平胸</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Bemly.github.io/blog-meekdai">蓝莓小果冻的博客</a></div>
+<div id="footer2"><span id="filingNum"><a href="https://beian.miit.gov.cn/" target="_blank">萌ICP备20242029号</a> • </span>
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("08/24/2024"!=""){
+    var startSite=new Date("08/24/2024");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Bemly/blog-meekdai");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>

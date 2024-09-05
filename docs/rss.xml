@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>蓝莓小果冻的博客</title><link>https://Bemly.github.io/blog-meekdai</link><description>一个喜欢尝鲜却苦于没有技术的小透明&lt;br /&gt;此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动</description><copyright>蓝莓小果冻的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/48025099?v=4&amp;size=64</url><title>avatar</title><link>https://Bemly.github.io/blog-meekdai</link></image><lastBuildDate>Thu, 05 Sep 2024 09:59:55 +0000</lastBuildDate><managingEditor>蓝莓小果冻的博客</managingEditor><ttl>60</ttl><webMaster>蓝莓小果冻的博客</webMaster><item><title>github pages 域名配置指北</title><link>https://Bemly.github.io/blog-meekdai/post/github%20pages%20-yu-ming-pei-zhi-zhi-bei.html</link><description>先进入 个人设置 &gt; Pages 里面添加域名 Add a domain&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>蓝莓小果冻的博客</title><link>https://Bemly.github.io/blog-meekdai</link><description>一个喜欢尝鲜却苦于没有技术的小透明&lt;br /&gt;此乃镜像博客，由「Gmeek框架 + Py.jinja2解释器 + utteranc 评论系统」驱动</description><copyright>蓝莓小果冻的博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/48025099?v=4&amp;size=64</url><title>avatar</title><link>https://Bemly.github.io/blog-meekdai</link></image><lastBuildDate>Thu, 05 Sep 2024 16:23:16 +0000</lastBuildDate><managingEditor>蓝莓小果冻的博客</managingEditor><ttl>60</ttl><webMaster>蓝莓小果冻的博客</webMaster><item><title>Arch-like Linux 下常用的软件安利</title><link>https://Bemly.github.io/blog-meekdai/post/Arch-like%20Linux%20-xia-chang-yong-de-ruan-jian-an-li.html</link><description>详细我已经整理为了一个仓库 https://github.com/Bemly/dotfiles-EOS&#13;
+&#13;
+可以作为主题即开即用捏www&#13;
+&#13;
+![](https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/2.png)&#13;
+![](https://raw.githubusercontent.com/Bemly/dotfiles-EOS/main/screenshot/1.png)&#13;
+&#13;
+  收录了一些本喵日常使用的炒鸡好用的Linux工具集合，主要存放我的一些配置文件用来备份。</description><guid isPermaLink="true">https://Bemly.github.io/blog-meekdai/post/Arch-like%20Linux%20-xia-chang-yong-de-ruan-jian-an-li.html</guid><pubDate>Thu, 05 Sep 2024 16:22:51 +0000</pubDate></item><item><title>github pages 域名配置指北</title><link>https://Bemly.github.io/blog-meekdai/post/github%20pages%20-yu-ming-pei-zhi-zhi-bei.html</link><description>先进入 个人设置 &gt; Pages 里面添加域名 Add a domain&#13;
 &#13;
 ![图片](https://github.com/user-attachments/assets/8ec6662d-da0c-4a7e-9150-74f89ce12446)&#13;
 &#13;
