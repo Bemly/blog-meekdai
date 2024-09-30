@@ -1,8 +1,5 @@
 ### 序言
 
-详细写在了 MDN 的文档上面：\
-https://github.com/mdn/content/pull/35442#issue-2462764033
-
 为了减少 Theora 安全性方面的维护，谷歌正式移除了 Theora 解码器
 
 ![2024-09-06-011332_hyprshot](https://github.com/user-attachments/assets/d492f194-3bf6-469b-8fa3-e96e01ed5c33)
